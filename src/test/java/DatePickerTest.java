@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import page.datepicker.DatePicker;
 import resolver.PageResolver;
 
-public class Sample {
+public class DatePickerTest {
 
     private AppiumDriverLocalService service;
 
@@ -30,7 +30,7 @@ public class Sample {
     }
 
     @Test
-    public void test() {
+    public void selectDateTest() {
         DatePicker picker = PageResolver.createMatchingPage(DatePicker.class,driver, config);
         picker.selectDate("12/12/2025");
     }
