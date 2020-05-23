@@ -7,6 +7,15 @@ import config.Config;
 
 public class PageResolver {
 
+    /**
+     * This method returns an implementation of PageInterface based on the configuration.
+     * It matches the class based on Platform and Version.
+     * @param pageInterface
+     * @param params
+     * @param <PageInterface>
+     * @return
+     */
+
     public static <PageInterface extends  BasePageInterface> PageInterface createMatchingPage(Class<? extends PageInterface> pageInterface, Object... params){
         PageInterface returnPage = null;
         try {

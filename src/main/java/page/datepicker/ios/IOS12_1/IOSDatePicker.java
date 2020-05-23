@@ -20,7 +20,6 @@ public class IOSDatePicker extends BasePage implements DatePicker {
 
     @Override
     public void selectDate(String date) {
-        DateUtil.parseInputDate(date);
         Calendar requiredDate = Calendar.getInstance();
         requiredDate.setTime(DateUtil.parseInputDate(date));
         Calendar today = Calendar.getInstance();
