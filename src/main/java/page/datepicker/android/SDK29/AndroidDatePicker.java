@@ -34,6 +34,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
     public void selectDate(String date) {
         final String yearLocatorId = "android:id/date_picker_header_year";
         appiumDriver.findElementById(yearLocatorId).click();
+
         Date inputDate = DateUtil.parseInputDate(date);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(inputDate);

@@ -4,26 +4,23 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Capability {
 
-
-    public static DesiredCapabilities IOS = getIOSCapabilities();
-
-    public static DesiredCapabilities ANDROID = getAndroidCapabilities();
-
-
-    private static DesiredCapabilities getIOSCapabilities() {
+    public static DesiredCapabilities getIOSCapabilities(String appPath, String automationName, String deviceName) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName","iOS");
-        capabilities.setCapability("app","/Users/rupin.nath/Library/Developer/Xcode/DerivedData/TestApplication-ftdbhicxakxovogvddqjewvybrac/Build/Products/Debug-iphonesimulator/TestApplication.app");
-        capabilities.setCapability("automationName","XCUITest");
-        capabilities.setCapability("deviceName","iPhone XR");
+        capabilities.setCapability("app",appPath);
+        // capabilities.setCapability("app","/Users/rupin.nath/Library/Developer/Xcode/DerivedData/TestApplication-ftdbhicxakxovogvddqjewvybrac/Build/Products/Debug-iphonesimulator/TestApplication.app");
+        capabilities.setCapability("automationName",automationName);
+        capabilities.setCapability("deviceName",deviceName);
         return capabilities;
     }
 
-    private static DesiredCapabilities getAndroidCapabilities() {
+    public static DesiredCapabilities getAndroidCapabilities(String appPackage, String mainActivity, String apkPath,String deviceName) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("deviceName", "Android Emulator");
-        capabilities.setCapability("appPackage", "gmbh.ambidexter.testapplication");
-        capabilities.setCapability("appActivity", ".main.MainActivity");
+        capabilities.setCapability("platformName","Android");
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", mainActivity);
+        capabilities.setCapability("app", apkPath);
+        capabilities.setCapability("deviceName", deviceName);
         return capabilities;
     }
 }
