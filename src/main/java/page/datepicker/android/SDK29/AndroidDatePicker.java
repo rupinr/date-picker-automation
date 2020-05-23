@@ -46,6 +46,11 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
         appiumDriver.findElementByAccessibilityId(accessibilityIdDateFormat.format(inputDate)).click();
     }
 
+    @Override
+    public String getSelectedDate() {
+        return appiumDriver.findElement(By.id("android:id/date_picker_header_date")).getText();
+    }
+
     private void scrollToYear(Calendar calendar, MobileElement element) {
         String yearStr = String.valueOf(calendar.get(Calendar.YEAR));
         while (true) {

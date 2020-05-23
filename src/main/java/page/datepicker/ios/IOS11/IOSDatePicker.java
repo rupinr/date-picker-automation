@@ -42,6 +42,11 @@ public class IOSDatePicker extends BasePage implements DatePicker {
         getPickerWheel().click();
     }
 
+    @Override
+    public String getSelectedDate() {
+        return getPickerWheel().getText();
+    }
+
 
     private MobileElement getPickerWheel() {
         return appiumDriver.findElementByClassName("XCUIElementTypePickerWheel");

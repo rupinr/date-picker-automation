@@ -4,6 +4,7 @@ import config.ConfigurationHolder;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,8 @@ public class DatePickerTest {
     @Test
     public void selectDateTest() {
         DatePicker picker = PageResolver.createMatchingPage(DatePicker.class,driver, config);
-        picker.selectDate("12/12/2025");
+        picker.selectDate("30/06/2020");
+        Assert.assertEquals(picker.getSelectedDate(), "Tue, Jun 30");
     }
 
 
