@@ -1,7 +1,6 @@
 package page.datepicker.android.SDK29;
 
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.offset.PointOption;
@@ -17,9 +16,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AndroidDatePicker  extends BasePage implements DatePicker {
+import static io.appium.java_client.MobileBy.AndroidUIAutomator;
+
+public class AndroidDatePicker extends BasePage implements DatePicker {
 
     private AppiumDriver<MobileElement> appiumDriver;
+    private final String YEAR_ID = "android:id/text1";
 
     public AndroidDatePicker(AppiumDriver<MobileElement> appiumDriver) {
         super(appiumDriver);
@@ -28,84 +30,83 @@ public class AndroidDatePicker  extends BasePage implements DatePicker {
 
     @Override
     public void selectDate(String date) {
-        System.out.println("ANDROID DATE PICKER");
-        appiumDriver.findElementById("android:id/date_picker_header_year").click();
+        final String yearLocatorId = "android:id/date_picker_header_year";
+        appiumDriver.findElementById(yearLocatorId).click();
 
-        MobileElement element = (MobileElement) appiumDriver.findElement(MobileBy.AndroidUIAutomator(
-                "new UiSelector().resourceId(\"android:id/date_picker_year_picker\")"));
-
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date dt = null;
+        String inputDateFormatString = "dd/MM/yyyy";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat(inputDateFormatString);
+        Date inputDate = null;
         try {
-            dt = df.parse(date);
+            inputDate = inputDateFormat.parse(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dt);
-        String yearStr = String.valueOf(calendar.get(Calendar.YEAR));
+        calendar.setTime(inputDate);
+        MobileElement yearPickerContainer = appiumDriver
+                .findElement(AndroidUIAutomator("new UiSelector().resourceId(\"android:id/date_picker_year_picker\")"));
+        scrollToYear(calendar, yearPickerContainer);
+        tapToMonth(calendar);
+        SimpleDateFormat accessibilityIdDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+        appiumDriver.findElementByAccessibilityId(accessibilityIdDateFormat.format(inputDate)).click();
+    }
 
+    private void scrollToYear(Calendar calendar, MobileElement element) {
+        String yearStr = String.valueOf(calendar.get(Calendar.YEAR));
         while (true) {
-            List<Integer> years = appiumDriver.findElements(By.id("android:id/text1")).stream().map(WebElement::getText)
+            List<Integer> years = appiumDriver.findElements(By.id(YEAR_ID)).stream().map(WebElement::getText)
                     .map(Integer::valueOf).collect(Collectors.toList());
 
-
             if (years.contains(calendar.get(Calendar.YEAR))) {
-                appiumDriver.findElements(By.id("android:id/text1")).stream().filter(
+                appiumDriver.findElements(By.id(YEAR_ID)).stream().filter(
                         item -> item.getText().equals(yearStr)
                 ).findFirst().get().click();
                 break;
             }
-
             if (years.get(years.size() / 2) > calendar.get(Calendar.YEAR)) {
                 scrollUp(element);
             } else {
                 scrollDown(element);
             }
         }
-
-        int taps = getTaps(calendar.get(Calendar.MONTH));
-
-        if(taps<0){
-            //tap right
-            for (int i=0; i<Math.abs(taps); i++) {
-                appiumDriver.findElement(By.id("android:id/next")).click();
-
-            }
-
-        }
-        else if (taps>0) {
-            //tap left
-            for (int i=0; i<Math.abs(taps); i++) {
-               appiumDriver.findElement(By.id("android:id/prev")).click();
-            }
-        }
-
-        SimpleDateFormat df2 = new SimpleDateFormat("dd MMMM yyyy");
-        appiumDriver.findElementByAccessibilityId(   df2.format(dt)).click();
-
-
     }
 
-    public void scrollDown(MobileElement element) {
+    private void tapToMonth(Calendar calendar) {
+        int tapCount = getNumberOfTaps(calendar.get(Calendar.MONTH));
+        if (tapCount < 0) {
+            // Tap Left until the expected month is reached.
+            tapElementRepeatedly("android:id/next", tapCount);
+        } else if (tapCount > 0) {
+            // Tap Left until the expected month is reached.
+            tapElementRepeatedly("android:id/prev", tapCount);
+        }
+    }
+
+    private void tapElementRepeatedly(String id, int tapCount) {
+        for (int i = 0; i < Math.abs(tapCount); i++) {
+            appiumDriver.findElement(By.id(id)).click();
+        }
+    }
+
+    private void scrollDown(MobileElement element) {
         new TouchAction<>(appiumDriver)
-                .press(PointOption.point(element.getCenter().x,element.getCenter().y+300))
-                .moveTo(PointOption.point(element.getCenter().x,element.getCenter().y))
+                .press(PointOption.point(element.getCenter().x, element.getCenter().y + 300))
+                .moveTo(PointOption.point(element.getCenter().x, element.getCenter().y))
                 .release()
                 .perform();
     }
 
-    public void scrollUp(MobileElement element) {
+    private void scrollUp(MobileElement element) {
         new TouchAction<>(appiumDriver)
-                .press(PointOption.point(element.getCenter().x,element.getCenter().y))
-                .moveTo(PointOption.point(element.getCenter().x,element.getCenter().y+300))
+                .press(PointOption.point(element.getCenter().x, element.getCenter().y))
+                .moveTo(PointOption.point(element.getCenter().x, element.getCenter().y + 300))
                 .release()
                 .perform();
     }
 
-    private int getTaps(int expectedMonth) {
+
+    private int getNumberOfTaps(int expectedMonth) {
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.MONTH)-expectedMonth;
+        return calendar.get(Calendar.MONTH) - expectedMonth;
     }
 }

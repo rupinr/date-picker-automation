@@ -33,7 +33,7 @@ public class Sample {
     public void test() {
         Config config = new Config(OS.ANDROID, Version.SDK29);
         DatePicker picker = PageResolver.createMatchingPage(DatePicker.class,driver, config);
-        picker.selectDate("12/1/2019");
+        picker.selectDate("12/12/2019");
     }
 
 
