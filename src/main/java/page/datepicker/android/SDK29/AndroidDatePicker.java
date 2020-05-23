@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.appium.java_client.MobileBy.AndroidUIAutomator;
+import util.AppiumUtil;
+import util.DateUtil;
 
 public class AndroidDatePicker extends BasePage implements DatePicker {
 
@@ -32,15 +34,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
     public void selectDate(String date) {
         final String yearLocatorId = "android:id/date_picker_header_year";
         appiumDriver.findElementById(yearLocatorId).click();
-
-        String inputDateFormatString = "dd/MM/yyyy";
-        SimpleDateFormat inputDateFormat = new SimpleDateFormat(inputDateFormatString);
-        Date inputDate = null;
-        try {
-            inputDate = inputDateFormat.parse(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        Date inputDate = DateUtil.parseInputDate(date);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(inputDate);
         MobileElement yearPickerContainer = appiumDriver
@@ -64,9 +58,9 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
                 break;
             }
             if (years.get(years.size() / 2) > calendar.get(Calendar.YEAR)) {
-                scrollUp(element);
+                AppiumUtil.swipeUp(appiumDriver, element.getCenter(),300);
             } else {
-                scrollDown(element);
+                AppiumUtil.swipeDown(appiumDriver, element.getCenter(),300);
             }
         }
     }
@@ -87,23 +81,6 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
             appiumDriver.findElement(By.id(id)).click();
         }
     }
-
-    private void scrollDown(MobileElement element) {
-        new TouchAction<>(appiumDriver)
-                .press(PointOption.point(element.getCenter().x, element.getCenter().y + 300))
-                .moveTo(PointOption.point(element.getCenter().x, element.getCenter().y))
-                .release()
-                .perform();
-    }
-
-    private void scrollUp(MobileElement element) {
-        new TouchAction<>(appiumDriver)
-                .press(PointOption.point(element.getCenter().x, element.getCenter().y))
-                .moveTo(PointOption.point(element.getCenter().x, element.getCenter().y + 300))
-                .release()
-                .perform();
-    }
-
 
     private int getNumberOfTaps(int expectedMonth) {
         Calendar calendar = Calendar.getInstance();
