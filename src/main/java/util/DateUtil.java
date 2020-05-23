@@ -20,13 +20,6 @@ public class DateUtil {
         return inputDate;
     }
 
-    public static boolean isSameDay(Calendar firstDate, Calendar secondDate) {
-
-        return firstDate.get(Calendar.DATE) == secondDate.get(Calendar.DATE)
-                && firstDate.get(Calendar.MONTH) == secondDate.get(Calendar.MONTH)
-                && firstDate.get(Calendar.YEAR) == secondDate.get(Calendar.YEAR);
-    }
-
     public static long daysBetween(Calendar firstDate, Calendar secondDate) {
         return  ChronoUnit.DAYS.between(firstDate.toInstant(), secondDate.toInstant());
     }
