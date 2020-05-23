@@ -11,7 +11,7 @@ repositories {
 
 dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.12'
-    testImplementation 'io.appium:java-client:7.3.0'
-    testImplementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
+    implementation 'io.appium:java-client:7.3.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:3.141.59'
 }
 
