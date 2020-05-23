@@ -2,12 +2,9 @@ package config;
 
 import capabality.Capability;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import resolver.OS;
-import resolver.Version;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Properties;
 
 public class ConfigurationHolder {

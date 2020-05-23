@@ -2,14 +2,13 @@ package page.datepicker.android.SDK29;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import page.BasePage;
 import page.datepicker.DatePicker;
+import util.AppiumUtil;
+import util.DateUtil;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,8 +16,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static io.appium.java_client.MobileBy.AndroidUIAutomator;
-import util.AppiumUtil;
-import util.DateUtil;
 
 public class AndroidDatePicker extends BasePage implements DatePicker {
 
@@ -64,9 +61,9 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
                 break;
             }
             if (years.get(years.size() / 2) > calendar.get(Calendar.YEAR)) {
-                AppiumUtil.swipeUp(appiumDriver, element.getCenter(),300);
+                AppiumUtil.swipeUp(appiumDriver, element.getCenter(), 300);
             } else {
-                AppiumUtil.swipeDown(appiumDriver, element.getCenter(),300);
+                AppiumUtil.swipeDown(appiumDriver, element.getCenter(), 300);
             }
         }
     }

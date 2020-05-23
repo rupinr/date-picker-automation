@@ -2,9 +2,6 @@ package page.datepicker.ios.IOS11;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
-import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.WebElement;
 import page.BasePage;
 import page.datepicker.DatePicker;
 import util.AppiumUtil;

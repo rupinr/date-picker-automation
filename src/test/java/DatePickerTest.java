@@ -1,4 +1,3 @@
-import capabality.Capability;
 import config.Config;
 import config.ConfigurationHolder;
 import io.appium.java_client.android.AndroidDriver;
@@ -36,7 +35,6 @@ public class DatePickerTest {
         picker.selectDate("30/06/2020");
         Assert.assertEquals(picker.getSelectedDate(), "Tue, Jun 30");
     }
-
 
     @After
     public void clean() {

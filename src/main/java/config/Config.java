@@ -1,8 +1,5 @@
 package config;
 
-import resolver.OS;
-import resolver.Version;
-
 public class Config {
 
     private OS os;
