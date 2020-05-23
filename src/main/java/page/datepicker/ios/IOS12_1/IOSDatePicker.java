@@ -24,6 +24,8 @@ public class IOSDatePicker extends BasePage implements DatePicker {
         requiredDate.setTime(DateUtil.parseInputDate(date));
         Calendar today = Calendar.getInstance();
         final int swipeDistance = 40;
+
+        //Scrolls as many as the number of days.
         long daysInBetween = DateUtil.daysBetween(today, requiredDate);
         if (daysInBetween > 0) {
             for (int i=0; i<=daysInBetween; i++) {

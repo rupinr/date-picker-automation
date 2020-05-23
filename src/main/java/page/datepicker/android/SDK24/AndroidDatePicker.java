@@ -48,6 +48,11 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
         return appiumDriver.findElement(By.id("android:id/date_picker_header_date")).getText();
     }
 
+    /**
+     * Scroll UP/DOWN until the required Year is in visible.
+     * @param calendar
+     * @param element
+     */
     private void scrollToYear(Calendar calendar, MobileElement element) {
         String yearStr = String.valueOf(calendar.get(Calendar.YEAR));
         while (true) {
@@ -68,6 +73,10 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
         }
     }
 
+    /**
+     * Navigates to next or previous month based on the current month and required month.
+     * @param calendar
+     */
     private void tapToMonth(Calendar calendar) {
         int tapCount = getNumberOfTaps(calendar.get(Calendar.MONTH));
         if (tapCount < 0) {
@@ -85,6 +94,12 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
         }
     }
 
+    /**
+     * Calculates the number of taps to reach the required month.
+     * Negative number means to Next and Positive means to go to Previous.
+     * @param expectedMonth
+     * @return
+     */
     private int getNumberOfTaps(int expectedMonth) {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.MONTH) - expectedMonth;
