@@ -65,6 +65,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
                 ).findFirst().get().click();
                 break;
             }
+            // Check the year in the middle.
             if (years.get(years.size() / 2) > calendar.get(Calendar.YEAR)) {
                 AppiumUtil.swipeUp(appiumDriver, element.getCenter(), 300);
             } else {
