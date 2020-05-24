@@ -12,7 +12,7 @@ public class ConfigurationHolder {
     private final static ConfigurationHolder configurationHolder = new ConfigurationHolder();
     private final Properties properties= new Properties();
 
-    public Config config ;
+    public PlatformConfig platformConfig;
 
     public DesiredCapabilities desiredCapabilities;
 
@@ -27,7 +27,7 @@ public class ConfigurationHolder {
     }
 
     private void populateConfig() {
-        config = new Config(OS.valueOf(properties.getProperty("os").toUpperCase()),
+        platformConfig = new PlatformConfig(Os.valueOf(properties.getProperty("os").toUpperCase()),
                 Version.valueOf(properties.getProperty("version")));
     }
 

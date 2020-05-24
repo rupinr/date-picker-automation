@@ -1,11 +1,11 @@
 package config;
 
-public class Config {
+public class PlatformConfig {
 
-    private OS os;
+    private Os os;
     private Version version;
 
-    public Config(OS os, Version version) {
+    public PlatformConfig(Os os, Version version) {
         this.os = os;
         this.version = version;
     }
@@ -18,11 +18,11 @@ public class Config {
         this.version = version;
     }
 
-    public OS getOs() {
+    public Os getOs() {
         return os;
     }
 
-    public void setOs(OS os) {
+    public void setOs(Os os) {
         this.os = os;
     }
 }

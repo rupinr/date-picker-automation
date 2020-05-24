@@ -1,5 +1,5 @@
 package config;
 
-public enum OS {
+public enum Os {
     ANDROID,IOS
 }

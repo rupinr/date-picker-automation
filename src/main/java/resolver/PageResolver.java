@@ -4,7 +4,7 @@ import config.ConfigurationHolder;
 import page.BasePageInterface;
 
 import java.lang.reflect.InvocationTargetException;
-import config.Config;
+import config.PlatformConfig;
 
 public class PageResolver {
 
@@ -21,7 +21,7 @@ public class PageResolver {
         PageInterface returnPage = null;
         try {
 
-            String ClassName = pageInterface.getPackage().getName()+getFullyQualifiedClassName(ConfigurationHolder.INSTANCE.config)+ pageInterface.getSimpleName();
+            String ClassName = pageInterface.getPackage().getName()+getFullyQualifiedClassName(ConfigurationHolder.INSTANCE.platformConfig)+ pageInterface.getSimpleName();
             Class<?> clazz=  Class.forName(ClassName);
             returnPage= (PageInterface) clazz.getConstructors()[0].newInstance(params[0]);
 
@@ -31,9 +31,9 @@ public class PageResolver {
         return returnPage;
 
     }
-    private static String getFullyQualifiedClassName(Config config) {
+    private static String getFullyQualifiedClassName(PlatformConfig platformConfig) {
         String classPrefix = "";
-        switch (config.getOs()) {
+        switch (platformConfig.getOs()) {
             case IOS: {
                 classPrefix = "IOS";
                 break;
@@ -43,7 +43,7 @@ public class PageResolver {
                 break;
             }
         }
-        return "."+config.getOs().toString().toLowerCase()+"."+config.getVersion()+"."+classPrefix;
+        return "."+ platformConfig.getOs().toString().toLowerCase()+"."+ platformConfig.getVersion()+"."+classPrefix;
 
     }
 }
