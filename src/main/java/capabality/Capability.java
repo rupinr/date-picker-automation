@@ -8,7 +8,6 @@ public class Capability {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("platformName","iOS");
         capabilities.setCapability("app",appPath);
-        // capabilities.setCapability("app","/Users/rupin.nath/Library/Developer/Xcode/DerivedData/TestApplication-ftdbhicxakxovogvddqjewvybrac/Build/Products/Debug-iphonesimulator/TestApplication.app");
         capabilities.setCapability("automationName",automationName);
         capabilities.setCapability("deviceName",deviceName);
         return capabilities;

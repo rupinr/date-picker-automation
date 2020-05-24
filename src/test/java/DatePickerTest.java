@@ -16,22 +16,16 @@ public class DatePickerTest {
 
     private AndroidDriver<WebElement> driver;
 
-    private final ConfigurationHolder configurationHolder = ConfigurationHolder.INSTANCE;
-
-    private Config config;
-
-
     @Before
     public void setUp() {
         service = AppiumDriverLocalService.buildDefaultService();
         service.start();
-        driver = new AndroidDriver<>(service.getUrl(), configurationHolder.desiredCapabilities);
-        config = configurationHolder.config;
+        driver = new AndroidDriver<>(service.getUrl(), ConfigurationHolder.INSTANCE.desiredCapabilities);
     }
 
     @Test
     public void selectDateTest() {
-        DatePicker picker = PageResolver.createMatchingPage(DatePicker.class,driver, config);
+        DatePicker picker = PageResolver.createMatchingPage(DatePicker.class,driver);
         picker.selectDate("30/06/2020");
         Assert.assertEquals(picker.getSelectedDate(), "Tue, Jun 30");
     }

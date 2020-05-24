@@ -1,5 +1,6 @@
 package resolver;
 
+import config.ConfigurationHolder;
 import page.BasePageInterface;
 
 import java.lang.reflect.InvocationTargetException;
@@ -19,7 +20,8 @@ public class PageResolver {
     public static <PageInterface extends  BasePageInterface> PageInterface createMatchingPage(Class<? extends PageInterface> pageInterface, Object... params){
         PageInterface returnPage = null;
         try {
-            String ClassName = pageInterface.getPackage().getName()+getFullyQualifiedClassName((Config) params[1])+ pageInterface.getSimpleName();
+
+            String ClassName = pageInterface.getPackage().getName()+getFullyQualifiedClassName(ConfigurationHolder.INSTANCE.config)+ pageInterface.getSimpleName();
             Class<?> clazz=  Class.forName(ClassName);
             returnPage= (PageInterface) clazz.getConstructors()[0].newInstance(params[0]);
 
