@@ -31,6 +31,7 @@ public class DatePickerTest {
 
     @After
     public void clean() {
+        driver.quit();
         service.stop();
     }
 }
