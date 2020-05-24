@@ -21,6 +21,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
 
     private AppiumDriver<MobileElement> appiumDriver;
     private final String YEAR_ID = "android:id/text1";
+    private boolean foundYear = false;
 
     public AndroidDatePicker(AppiumDriver<MobileElement> appiumDriver) {
         super(appiumDriver);
@@ -55,7 +56,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
      */
     private void scrollToYear(Calendar calendar, MobileElement element) {
         String yearStr = String.valueOf(calendar.get(Calendar.YEAR));
-        while (true) {
+        while (!foundYear) {
             List<Integer> years = appiumDriver.findElements(By.id(YEAR_ID)).stream().map(WebElement::getText)
                     .map(Integer::valueOf).collect(Collectors.toList());
 
@@ -63,6 +64,7 @@ public class AndroidDatePicker extends BasePage implements DatePicker {
                 appiumDriver.findElements(By.id(YEAR_ID)).stream().filter(
                         item -> item.getText().equals(yearStr)
                 ).findFirst().get().click();
+                foundYear = true;
                 break;
             }
             // Check the year in the middle.
