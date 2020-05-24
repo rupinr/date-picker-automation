@@ -2,5 +2,5 @@ package config;
 
 public enum Version {
 
-    SDK24, SDK28, IOS11, IOS10, IOS12_1
+    SDK_24, SDK_28, IOS_11, IOS_10, IOS_12_1
 }

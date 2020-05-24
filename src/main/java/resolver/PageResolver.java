@@ -43,7 +43,8 @@ public class PageResolver {
                 break;
             }
         }
-        return "."+ platformConfig.getOs().toString().toLowerCase()+"."+ platformConfig.getVersion()+"."+classPrefix;
-
+        return "."+ platformConfig.getOs().toString().toLowerCase()+
+                "."+ platformConfig.getVersion().toString().toLowerCase()
+                +"."+classPrefix;
     }
 }

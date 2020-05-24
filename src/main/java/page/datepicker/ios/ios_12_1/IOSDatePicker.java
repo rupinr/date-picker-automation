@@ -1,4 +1,4 @@
-package page.datepicker.ios.IOS12_1;
+package page.datepicker.ios.ios_12_1;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;

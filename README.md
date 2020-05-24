@@ -3,8 +3,8 @@
 The test will pickup the correct implementation of the DatePickerPage class based on the configuration.
 Every page has to to defined in an interface and Android and IOS implementation should implement that interface.
 
-Example`page.datepicker.DatePicker` is the Interface and `page.datepicker.ios.IOS12_1.IOSDatePicker` and 
-`page.datepicker.android.SDK24.AndroidDatePicker` is the corresponding IOS12_1 and Android SDK24 implemenation.
+Example`page.datepicker.DatePicker` is the Interface and `page.datepicker.ios.ios_12_1.IOSDatePicker` and 
+`page.datepicker.android.sdk_24.AndroidDatePicker` is the corresponding IOS12_1 and Android SDK24 implemenation.
 It is important that the package name should be in this specifc format.
 
 This Framework uses reflecation to find the correct implementation class. 

@@ -1,4 +1,4 @@
-package page.datepicker.android.SDK24;
+package page.datepicker.android.sdk_24;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;

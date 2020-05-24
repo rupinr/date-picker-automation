@@ -28,7 +28,7 @@ public class ConfigurationHolder {
 
     private void populateConfig() {
         platformConfig = new PlatformConfig(Os.valueOf(properties.getProperty("os").toUpperCase()),
-                Version.valueOf(properties.getProperty("version")));
+                Version.valueOf(properties.getProperty("version").toUpperCase()));
     }
 
     private void populateDesiredCapabilities() {
