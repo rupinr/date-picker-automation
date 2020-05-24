@@ -15,7 +15,7 @@ Not that, at a time, only one of the platform properties can be defined.
 
 ````
 os=Android
-version=SDK24
+version=sdk_24
 appPackage=gmbh.ambidexter.testapplication
 appActivity=.main.MainActivity
 app=/path/to/apk/app-debug.apk
@@ -23,7 +23,7 @@ deviceName=Android Emulator
 ````
 ````
 os=iOS
-version=IOS12_1
+version=ios_12_1
 app=/path/to/TestApplication.app
 automationName=XCUITest
 deviceName=iPhone XR
